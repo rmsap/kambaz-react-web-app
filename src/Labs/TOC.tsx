@@ -18,6 +18,11 @@ export default function TOC() {
       <li>
         <Link to="/Kambaz">Kambaz</Link>
       </li>
+      <li>
+        <a href="https://github.com/rmsap/kambaz-react-web-app" id="wd-github">
+          GitHub
+        </a>
+      </li>
     </ul>
   );
 }
