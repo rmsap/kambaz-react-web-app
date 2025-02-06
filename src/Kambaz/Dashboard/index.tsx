@@ -1,115 +1,182 @@
 import { Link } from "react-router-dom";
+import { Row, Col, Card, Button } from "react-bootstrap";
+
 export default function Dashboard() {
   return (
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
-      <h2 id="wd-dashboard-published">Published Courses (12)</h2> <hr />
+      <h2 id="wd-dashboard-published">Published Courses (7)</h2> <hr />
       <div id="wd-dashboard-courses">
-        <div className="wd-dashboard-course">
-          <Link
-            to="/Kambaz/Courses/1234/Home"
-            className="wd-dashboard-course-link"
-          >
-            <img src="/images/reactImage.png" width={200} />
-            <div>
-              <h5> CS1234 React JS </h5>
-              <p className="wd-dashboard-course-title">
-                Full Stack software developer
-              </p>
-              <button> Go </button>
-            </div>
-          </Link>
-        </div>
-        <div className="wd-dashboard-course">
-          <Link
-            to="/Kambaz/Courses/4400/Home"
-            className="wd-dashboard-course-link"
-          >
-            <img src="/images/plImage.jpg" width={200} />
-            <div>
-              <h5> CS4400 Programming Languages </h5>
-              <p className="wd-dashboard-course-title">
-                Learn about programming languages
-              </p>
-              <button> Go </button>
-            </div>
-          </Link>
-        </div>
-        <div className="wd-dashboard-course">
-          <Link
-            to="/Kambaz/Courses/2500/Home"
-            className="wd-dashboard-course-link"
-          >
-            <img src="/images/fundies1Image.jpg" width={200} />
-            <div>
-              <h5> CS2500 Fundies 1 </h5>
-              <p className="wd-dashboard-course-title">
-                Learn about fundamentals of programming
-              </p>
-              <button> Go </button>
-            </div>
-          </Link>
-        </div>
-        <div className="wd-dashboard-course">
-          <Link
-            to="/Kambaz/Courses/2550/Home"
-            className="wd-dashboard-course-link"
-          >
-            <img src="/images/fundies2Image.jpg" width={200} />
-            <div>
-              <h5> CS2550 Fundies 2 </h5>
-              <p className="wd-dashboard-course-title">
-                Learn about more fundamentals of programming
-              </p>
-              <button> Go </button>
-            </div>
-          </Link>
-        </div>
-        <div className="wd-dashboard-course">
-          <Link
-            to="/Kambaz/Courses/3000/Home"
-            className="wd-dashboard-course-link"
-          >
-            <img src="/images/algoImage.jpg" width={200} />
-            <div>
-              <h5> CS3000 Algorithms </h5>
-              <p className="wd-dashboard-course-title">
-                Learn about how to design algorithms
-              </p>
-              <button> Go </button>
-            </div>
-          </Link>
-        </div>
-        <div className="wd-dashboard-course">
-          <Link
-            to="/Kambaz/Courses/3500/Home"
-            className="wd-dashboard-course-link"
-          >
-            <img src="/images/oodImage.svg" width={200} />
-            <div>
-              <h5> CS3500 OOD</h5>
-              <p className="wd-dashboard-course-title">
-                Learn about object orient programming
-              </p>
-              <button> Go </button>
-            </div>
-          </Link>
-        </div>
-        <div className="wd-dashboard-course">
-          <Link
-            to="/Kambaz/Courses/4500/Home"
-            className="wd-dashboard-course-link"
-          >
-            <img src="/images/softwareDevImage.jpg" width={200} />
-            <div>
-              <h5> CS4500 Software Dev</h5>
-              <p className="wd-dashboard-course-title">
-                Learn about developing software
-              </p>
-              <button> Go </button>
-            </div>
-          </Link>
-        </div>
+        <Row xs={1} md={5} className="g-4">
+          <Col className="wd-dashboard-course" style={{ width: "250px" }}>
+            <Card>
+              <Link
+                to="/Kambaz/Courses/1234/Home"
+                className="wd-dashboard-course-link text-decoration-none text-dark"
+              >
+                <Card.Img
+                  variant="top"
+                  src="/images/webDevImage.jpg"
+                  width="100%"
+                  height={160}
+                />
+                <Card.Body>
+                  <Card.Title className="wd-dashboard-course-title">
+                    CS4550 Web Dev
+                  </Card.Title>
+                  <Card.Text className="wd-dashboard-course-description">
+                    Learn how to develop for web
+                  </Card.Text>
+                  <Button variant="primary">Go</Button>
+                </Card.Body>
+              </Link>
+            </Card>
+          </Col>
+          <Col className="wd-dashboard-course" style={{ width: "250px" }}>
+            <Card>
+              <Link
+                to="/Kambaz/Courses/1234/Home"
+                className="wd-dashboard-course-link text-decoration-none text-dark"
+              >
+                <Card.Img
+                  variant="top"
+                  src="/images/plImage.jpg"
+                  width="100%"
+                  height={160}
+                />
+                <Card.Body>
+                  <Card.Title className="wd-dashboard-course-title">
+                    CS4400 Programming Languages
+                  </Card.Title>
+                  <Card.Text className="wd-dashboard-course-description">
+                    Learn about programming languages
+                  </Card.Text>
+                  <Button variant="primary">Go</Button>
+                </Card.Body>
+              </Link>
+            </Card>
+          </Col>
+          <Col className="wd-dashboard-course" style={{ width: "250px" }}>
+            <Card>
+              <Link
+                to="/Kambaz/Courses/1234/Home"
+                className="wd-dashboard-course-link text-decoration-none text-dark"
+              >
+                <Card.Img
+                  variant="top"
+                  src="/images/fundies1Image.jpg"
+                  width="100%"
+                  height={160}
+                />
+                <Card.Body>
+                  <Card.Title className="wd-dashboard-course-title">
+                    CS2500 Fundies 1
+                  </Card.Title>
+                  <Card.Text className="wd-dashboard-course-description">
+                    Learn about fundamentals of programming
+                  </Card.Text>
+                  <Button variant="primary">Go</Button>
+                </Card.Body>
+              </Link>
+            </Card>
+          </Col>
+          <Col className="wd-dashboard-course" style={{ width: "250px" }}>
+            <Card>
+              <Link
+                to="/Kambaz/Courses/1234/Home"
+                className="wd-dashboard-course-link text-decoration-none text-dark"
+              >
+                <Card.Img
+                  variant="top"
+                  src="/images/fundies2Image.jpg"
+                  width="100%"
+                  height={160}
+                />
+                <Card.Body>
+                  <Card.Title className="wd-dashboard-course-title">
+                    CS2550 Fundies 2
+                  </Card.Title>
+                  <Card.Text className="wd-dashboard-course-description">
+                    Learn about more fundamentals of programming
+                  </Card.Text>
+                  <Button variant="primary">Go</Button>
+                </Card.Body>
+              </Link>
+            </Card>
+          </Col>
+          <Col className="wd-dashboard-course" style={{ width: "250px" }}>
+            <Card>
+              <Link
+                to="/Kambaz/Courses/1234/Home"
+                className="wd-dashboard-course-link text-decoration-none text-dark"
+              >
+                <Card.Img
+                  variant="top"
+                  src="/images/algoImage.jpg"
+                  width="100%"
+                  height={160}
+                />
+                <Card.Body>
+                  <Card.Title className="wd-dashboard-course-title">
+                    CS3000 Algorithms
+                  </Card.Title>
+                  <Card.Text className="wd-dashboard-course-description">
+                    Learn about how to design algorithms
+                  </Card.Text>
+                  <Button variant="primary">Go</Button>
+                </Card.Body>
+              </Link>
+            </Card>
+          </Col>
+          <Col className="wd-dashboard-course" style={{ width: "250px" }}>
+            <Card>
+              <Link
+                to="/Kambaz/Courses/1234/Home"
+                className="wd-dashboard-course-link text-decoration-none text-dark"
+              >
+                <Card.Img
+                  variant="top"
+                  src="/images/oodImage.svg"
+                  width="100%"
+                  height={160}
+                />
+                <Card.Body>
+                  <Card.Title className="wd-dashboard-course-title">
+                    CS3500 OOD
+                  </Card.Title>
+                  <Card.Text className="wd-dashboard-course-description">
+                    Learn about object orient programming
+                  </Card.Text>
+                  <Button variant="primary">Go</Button>
+                </Card.Body>
+              </Link>
+            </Card>
+          </Col>
+          <Col className="wd-dashboard-course" style={{ width: "250px" }}>
+            <Card>
+              <Link
+                to="/Kambaz/Courses/1234/Home"
+                className="wd-dashboard-course-link text-decoration-none text-dark"
+              >
+                <Card.Img
+                  variant="top"
+                  src="/images/softwareDevImage.jpg"
+                  width="100%"
+                  height={160}
+                />
+                <Card.Body>
+                  <Card.Title className="wd-dashboard-course-title">
+                    CS4500 Software Dev
+                  </Card.Title>
+                  <Card.Text className="wd-dashboard-course-description">
+                    Learn about developing software
+                  </Card.Text>
+                  <Button variant="primary">Go</Button>
+                </Card.Body>
+              </Link>
+            </Card>
+          </Col>
+        </Row>
       </div>
     </div>
   );

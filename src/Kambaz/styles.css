@@ -1,0 +1,118 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+body * {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@media (min-width: 768px) {
+  #wd-kambaz .wd-main-content-offset {
+    padding-left: 140px !important;
+  }
+}
+
+.list-group.wd > .list-group-item.active {
+  color: black;
+  background-color: white;
+  border-left: 3px solid black !important;
+}
+
+.btn-secondary {
+  --bs-btn-color: #000 !important;
+  --bs-btn-bg: #c7cdd1 !important;
+  --bs-btn-border-color: #c7cdd1 !important;
+  --bs-btn-hover-color: #fff !important;
+}
+.bg-secondary {
+  --bs-secondary-rgb: 199, 205, 209;
+}
+.list-group-item {
+  --bs-list-group-border-color: gray;
+}
+.wd-lesson {
+  border-left: 3px solid green !important;
+}
+
+.wd-rounded-corners-all-around {
+  border-radius: 50px;
+}
+
+.wd-smoothed-corners-all-around {
+  border-radius: 10px;
+}
+
+.wd-border-solid {
+  border-style: solid;
+}
+
+.wd-border-grey {
+  border-color: #7c7c7f;
+}
+
+.wd-border-thin {
+  border-width: 1px;
+}
+
+.wd-padding-thin {
+  padding: 5px;
+}
+
+.wd-padding-med {
+  padding: 10px;
+}
+
+.wd-grid-col-70 {
+  width: 70%;
+  float: inline-end;
+}
+
+.wd-grid-col-15 {
+  width: 15%;
+  float: inline-end;
+}
+
+.wd-icon-green {
+  color: green;
+}
+
+.wd-assignment {
+  border-left: 3px solid green !important;
+}
+
+.wd-grid-row {
+  clear: both;
+}
+
+.wd-grid-col-79 {
+  width: 79%;
+  float: inline-start;
+}
+
+.wd-grid-col-7-right {
+  width: 7%;
+  float: right;
+}
+
+.wd-grid-col-7-left {
+  width: 7%;
+  float: left;
+}
+
+.wd-grid-col-60 {
+  width: 60%;
+  float: inline-start;
+}
+
+.wd-grid-col-40 {
+  width: 40%;
+  float: inline-end;
+}
+
+.wd-no-decoration {
+  text-decoration: none;
+}
+
+.wd-aligned-right {
+  text-align: right;
+}

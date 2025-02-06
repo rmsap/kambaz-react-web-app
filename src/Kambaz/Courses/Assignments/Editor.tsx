@@ -1,141 +1,171 @@
+import {
+  Button,
+  Col,
+  Container,
+  Form,
+  FormControl,
+  FormGroup,
+  FormLabel,
+  FormSelect,
+  InputGroup,
+  Row,
+} from "react-bootstrap";
+import { BiCalendar } from "react-icons/bi";
+
 export default function AssignmentEditor() {
   return (
-    <div id="wd-assignments-editor">
-      <label htmlFor="wd-name">
-        <h3>Assignment Name</h3>
-      </label>
-      <br />
-      <input id="wd-name" value="A1 - ENV + HTML" />
-      <br />
-      <br />
-      <textarea id="wd-description">
-        The assignment is available online Submit a link to the landing page of
-      </textarea>
-      <br />
-      <table>
-        <tr>
-          <td align="right" valign="top">
-            <label htmlFor="wd-points">Points</label>
-          </td>
-          <td>
-            <input id="wd-points" value={100} />
-          </td>
-        </tr>
-        <tr>
-          <td align="right" valign="top">
-            <label htmlFor="wd-group">Assignment Group</label>
-          </td>
-          <td>
-            <select defaultValue="ASSIGNMENTS" id="wd-group">
-              <option value="ASSIGNMENTS">ASSIGNMENTS</option>
+    <Container id="wd-assignments-editor">
+      <Form>
+        <FormGroup className="mb-3" controlId="wd-name">
+          <FormLabel>Assignment Name</FormLabel>
+          <FormControl type="text" value={"A1"} />
+        </FormGroup>
+        <FormGroup className="mb-3" controlId="wd-description">
+          <FormControl as="textarea" rows={3} />
+        </FormGroup>
+        <Form.Group as={Row} className="mb-3" controlId="wd-points">
+          <Form.Label column sm={2} className="wd-aligned-right">
+            Points
+          </Form.Label>
+          <Col sm={10}>
+            <Form.Control type="text" value="100" />
+          </Col>
+        </Form.Group>
+        <Form.Group as={Row} className="mb-3" controlId="wd-group">
+          <Form.Label column sm={2} className="wd-aligned-right">
+            Assignment Group
+          </Form.Label>
+          <Col sm={10}>
+            <FormSelect>
+              <option selected value="ASSIGNMENTS">
+                ASSIGNMENTS
+              </option>
               <option value="QUIZZES">QUIZZES</option>
               <option value="EXAMS">EXAMS</option>
               <option value="PROJECTS">PROJECTS</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td align="right" valign="top">
-            <label htmlFor="wd-display-grade-as">Display Grade as</label>
-          </td>
-          <td>
-            <select defaultValue="PERCENTAGE" id="wd-display-grade-as">
-              <option value="PERCENTAGE">PERCENTAGE</option>
-              <option value="POINTS">POINTS</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td align="right" valign="top">
-            <label htmlFor="wd-submission-type">Submission Type</label>
-          </td>
-          <td>
-            <select defaultValue="ONLINE" id="wd-submission-type">
-              <option value="ONLINE">Online</option>
-              <option value="PHYSICAL">Physical</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td></td>
-          <td align="left" valign="top">
-            <label> Online Entry Options </label>
-            <br />
-            <input type="checkbox" name="entry-options" id="wd-text-entry" />
-            <label htmlFor="wd-text-entry">Text Entry</label>
-            <br />
-            <input type="checkbox" name="entry-options" id="wd-website-url" />
-            <label htmlFor="wd-website-url">Website URL</label>
-            <br />
-            <input
-              type="checkbox"
-              name="entry-options"
-              id="wd-media-recordings"
-            />
-            <label htmlFor="wd-media-recordings">Media Recordings</label>
-            <br />
-            <input
-              type="checkbox"
-              name="entry-options"
-              id="wd-student-annotation"
-            />
-            <label htmlFor="wd-student-annotation">Student Annotation</label>
-            <br />
-            <input type="checkbox" name="entry-options" id="wd-file-upload" />
-            <label htmlFor="wd-file-upload">File Uploads</label>
-          </td>
-        </tr>
-        <tr>
-          <td align="right" valign="top">
+            </FormSelect>
+          </Col>
+        </Form.Group>
+        <Form.Group as={Row} className="mb-3" controlId="wd-display-grade-as">
+          <Form.Label column sm={2} className="wd-aligned-right">
+            Display Grade as
+          </Form.Label>
+          <Col sm={10}>
+            <FormSelect>
+              <option selected value="PERCENTAGE">
+                Percentage
+              </option>
+              <option value="POINTS">Points</option>
+            </FormSelect>
+          </Col>
+        </Form.Group>
+        <Form.Group as={Row} className="mb-3" controlId="wd-submission-type">
+          <Form.Label column sm={2} className="wd-aligned-right">
+            Submission Type
+          </Form.Label>
+          <Col sm={10}>
+            <div className="wd-border-thin wd-border-grey wd-border-solid wd-smoothed-corners-all-around wd-padding-med">
+              <FormSelect>
+                <option selected value="ONLINE">
+                  Online
+                </option>
+                <option value="PHYSICAL">Physical</option>
+              </FormSelect>
+              <br />
+              <strong>Online Entry Options</strong>
+              <br />
+              <Form.Check
+                type="checkbox"
+                label="Text Entry"
+                name="onlineEntryOptions"
+              />
+              <Form.Check
+                type="checkbox"
+                label="Website URL"
+                name="onlineEntryOptions"
+              />
+              <Form.Check
+                type="checkbox"
+                label="Media Recordings"
+                name="onlineEntryOptions"
+              />
+              <Form.Check
+                type="checkbox"
+                label="Student Annotation"
+                name="onlineEntryOptions"
+              />
+              <Form.Check
+                type="checkbox"
+                label="File Upload"
+                name="onlineEntryOptions"
+              />
+            </div>
+          </Col>
+        </Form.Group>
+        <Form.Group as={Row} className="mb-3" controlId="wd-assign-to">
+          <Form.Label column sm={2} className="wd-aligned-right">
             Assign
-          </td>
-          <td>
-            <label htmlFor="wd-assign-to">Assign to</label>
+          </Form.Label>
+          <Col
+            sm={10}
+            className="wd-border-thin wd-border-grey wd-border-solid wd-smoothed-corners-all-around wd-padding-med"
+          >
+            <strong>Assign to</strong>
+            <FormControl type="text" value={"Everyone"} />
             <br />
-            <input id="wd-assign-to" value={"Everyone"} />
-          </td>
-        </tr>
-        <tr>
-          <td />
-          <td>
-            <label htmlFor="wd-due-date">Due</label>
+            <strong>Due</strong>
+            <InputGroup>
+              <FormControl type="text" value={"February 12, 2024, 11:59 PM"} />
+              <InputGroup.Text>
+                <BiCalendar />
+              </InputGroup.Text>
+            </InputGroup>
             <br />
-            <input type="date" value="" id="wd-due-date" />
-          </td>
-        </tr>
-        <tr>
-          <td />
-          <td>
-            <label htmlFor="wd-available-from">Available from</label>
-            <br />
-            <input type="date" value="" id="wd-available-from" />
-          </td>
-          <td>
-            <label htmlFor="wd-available-until">Until</label>
-            <br />
-            <input type="date" value="" id="wd-available-until" />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <hr />
-          </td>
-          <td>
-            <hr />
-          </td>
-          <td>
-            <hr />
-          </td>
-        </tr>
-        <tr>
-          <td />
-          <td />
-          <td align="right" valign="top">
-            <button>Cancel</button> <button>Save</button>
-          </td>
-        </tr>
-      </table>
-      <hr />
-    </div>
+            <Form.Group as={Row} className="mb-3" controlId="wd-available-from">
+              <Col sm={5}>
+                <strong>Available from</strong>
+                <InputGroup>
+                  <FormControl
+                    type="text"
+                    value={"February 5, 2024, 12:00 AM"}
+                  />
+                  <InputGroup.Text>
+                    <BiCalendar />
+                  </InputGroup.Text>
+                </InputGroup>
+              </Col>
+              <Col sm={5}>
+                <strong>Until</strong>
+                <InputGroup>
+                  <FormControl
+                    type="text"
+                    value={"February 5, 2024, 12:00 AM"}
+                  />
+                  <InputGroup.Text>
+                    <BiCalendar />
+                  </InputGroup.Text>
+                </InputGroup>
+              </Col>
+            </Form.Group>
+          </Col>
+        </Form.Group>
+      </Form>
+      <Button
+        variant="danger"
+        size="lg"
+        className="me-1 float-end"
+        id="wd-save-btn"
+      >
+        Save
+      </Button>
+      <Button
+        variant="secondary"
+        size="lg"
+        className="me-1 float-end"
+        id="wd-save-btn"
+      >
+        Cancel
+      </Button>
+    </Container>
   );
 }
