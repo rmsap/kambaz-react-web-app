@@ -1,3 +1,4 @@
+import * as db from "../../Database";
 import AssignmentControls from "./AssignmentControls";
 import { ListGroup } from "react-bootstrap";
 import { BsGripVertical, BsPlus } from "react-icons/bs";
@@ -5,9 +6,11 @@ import AssignmentControlButtons from "./AssignmentControlButtons";
 import { IoEllipsisVertical } from "react-icons/io5";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import { LuNotebookPen } from "react-icons/lu";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 
 export default function Assignments() {
+  const { cid } = useParams();
+  const assignments = db.assignments;
   return (
     <div id="wd-assignments">
       <AssignmentControls />
@@ -33,93 +36,42 @@ export default function Assignments() {
             </div>
           </div>
           <ListGroup className="wd-assignments rounded-0">
-            <ListGroup.Item className="wd-assignment p-3 ps-1">
-              <div className="wd-grid-row">
-                <div className="wd-grid-col-7-left">
-                  <BsGripVertical className="me-2 fs-3" />
-                </div>
-                <div className="wd-grid-col-7-left">
-                  <LuNotebookPen className="me-2 fs-3 wd-icon-green" />
-                </div>
-                <div className="wd-grid-col-7-right">
-                  <AssignmentControlButtons />
-                </div>
-                <div className="wd-grid-col-79">
-                  <Link
-                    to="/Kambaz/Courses/1234/Assignments/:aid"
-                    id="wd-assignment-link"
-                    className="text-dark wd-no-decoration"
-                  >
-                    <strong>A1</strong>
-                  </Link>
-                  <br />
-                  <small className="text-secondary">
-                    <small className="text-danger">Multiple Modules</small> |
-                    <strong>Not available until</strong> February 12 at 12:00 am
-                    | <br />
-                    <strong>Due</strong> February 19 at 11:59 pm | 100 points
-                  </small>
-                </div>
-              </div>
-            </ListGroup.Item>
-            <ListGroup.Item className="wd-assignment p-3 ps-1">
-              <div className="wd-grid-row">
-                <div className="wd-grid-col-7-left">
-                  <BsGripVertical className="me-2 fs-3" />
-                </div>
-                <div className="wd-grid-col-7-left">
-                  <LuNotebookPen className="me-2 fs-3 wd-icon-green" />
-                </div>
-                <div className="wd-grid-col-7-right">
-                  <AssignmentControlButtons />
-                </div>
-                <div className="wd-grid-col-79">
-                  <Link
-                    to="/Kambaz/Courses/1234/Assignments/:aid"
-                    id="wd-assignment-link"
-                    className="text-dark wd-no-decoration"
-                  >
-                    <strong>A2</strong>
-                  </Link>
-                  <br />
-                  <small className="text-secondary">
-                    <small className="text-danger">Multiple Modules</small> |
-                    <strong>Not available until</strong> February 19 at 12:00 am
-                    | <br />
-                    <strong>Due</strong> February 26 at 11:59 pm | 100 points
-                  </small>
-                </div>
-              </div>
-            </ListGroup.Item>
-            <ListGroup.Item className="wd-assignment p-3 ps-1">
-              <div className="wd-grid-row">
-                <div className="wd-grid-col-7-left">
-                  <BsGripVertical className="me-2 fs-3" />
-                </div>
-                <div className="wd-grid-col-7-left">
-                  <LuNotebookPen className="me-2 fs-3 wd-icon-green" />
-                </div>
-                <div className="wd-grid-col-7-right">
-                  <AssignmentControlButtons />
-                </div>
-                <div className="wd-grid-col-79">
-                  <Link
-                    to="/Kambaz/Courses/1234/Assignments/:aid"
-                    id="wd-assignment-link"
-                    className="text-dark wd-no-decoration"
-                  >
-                    <strong>A3</strong>
-                  </Link>
-                  <br />
-                  <small className="text-secondary">
-                    <small className="text-danger">Multiple Modules</small> |
-                    <strong>Not available until</strong> February 26 at 12:00 am
-                    | <br />
-                    <strong>Due</strong> March 5 at 11:59 pm | 100 points
-                  </small>
-                </div>
-              </div>
-            </ListGroup.Item>
+            {assignments
+              .filter((assignment) => assignment.course === cid)
+              .map((assignment) => (
+                <ListGroup.Item className="wd-assignment p-3 ps-1">
+                  <div className="wd-grid-row">
+                    <div className="wd-grid-col-7-left">
+                      <BsGripVertical className="me-2 fs-3" />
+                    </div>
+                    <div className="wd-grid-col-7-left">
+                      <LuNotebookPen className="me-2 fs-3 wd-icon-green" />
+                    </div>
+                    <div className="wd-grid-col-7-right">
+                      <AssignmentControlButtons />
+                    </div>
+                    <div className="wd-grid-col-79">
+                      <Link
+                        to={`/Kambaz/Courses/${cid}/Assignments/${assignment._id}`}
+                        id="wd-assignment-link"
+                        className="text-dark wd-no-decoration"
+                      >
+                        <strong>{assignment.title}</strong>
+                      </Link>
+                      <br />
+                      <small className="text-secondary">
+                        <small className="text-danger">
+                          {assignment.modules}
+                        </small>{" "}
+                        | <strong>Not available until</strong>{" "}
+                        {assignment.available} | <br />
+                        <strong>Due</strong> {assignment.due} |{" "}
+                        {assignment.points} points
+                      </small>
+                    </div>
+                  </div>
+                </ListGroup.Item>
+              ))}
           </ListGroup>
         </ListGroup.Item>
       </ListGroup>
