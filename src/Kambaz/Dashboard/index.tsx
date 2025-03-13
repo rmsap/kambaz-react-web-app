@@ -1,5 +1,4 @@
 import { useState } from "react";
-import * as db from "../Database";
 import { Link } from "react-router-dom";
 import { Col, Card, Button, FormControl } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -217,6 +216,45 @@ export default function Dashboard({
                             {course.description}{" "}
                           </Card.Text>
                           <Button variant="primary"> Go </Button>
+                          {courses
+                            .filter((course: any) =>
+                              enrollments.some(
+                                (enrollment: any) =>
+                                  enrollment.user === currentUser._id &&
+                                  enrollment.course === course._id
+                              )
+                            )
+                            .includes(course) ? (
+                            <Button
+                              variant="danger"
+                              className="ms-1"
+                              onClick={() =>
+                                dispatch(
+                                  deleteEnrollment({
+                                    user: currentUser._id,
+                                    course: course._id,
+                                  })
+                                )
+                              }
+                            >
+                              Unenroll
+                            </Button>
+                          ) : (
+                            <Button
+                              variant="success"
+                              className="ms-1"
+                              onClick={() =>
+                                dispatch(
+                                  addEnrollment({
+                                    user: currentUser._id,
+                                    course: course._id,
+                                  })
+                                )
+                              }
+                            >
+                              Enroll
+                            </Button>
+                          )}
                           <ProtectedContent>
                             <button
                               onClick={(event) => {
