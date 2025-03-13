@@ -1,4 +1,3 @@
-import * as db from "../../Database";
 import AssignmentControls from "./AssignmentControls";
 import { ListGroup } from "react-bootstrap";
 import { BsGripVertical, BsPlus } from "react-icons/bs";
@@ -7,10 +6,20 @@ import { IoEllipsisVertical } from "react-icons/io5";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import { LuNotebookPen } from "react-icons/lu";
 import { Link, useParams } from "react-router";
+import ProtectedContent from "../../Account/ProtectedContent";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteAssignment } from "./reducer";
+import { useState } from "react";
+import AssignmentDeleteModal from "./AssignmentDeleteModal";
 
 export default function Assignments() {
   const { cid } = useParams();
-  const assignments = db.assignments;
+  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+  const [show, setShow] = useState(false);
+  const [assignmentId, setAssignmentId] = useState("");
+  const dispatch = useDispatch();
+  const handleClose = () => setShow(false);
+
   return (
     <div id="wd-assignments">
       <AssignmentControls />
@@ -21,7 +30,9 @@ export default function Assignments() {
       <ListGroup className="rounded-0" id="wd-modules">
         <ListGroup.Item className="wd-module p-0 mb-5 fs-5 border-gray">
           <div className="wd-title p-3 ps-2 bg-secondary">
-            <BsGripVertical className="me-2 fs-3" />
+            <ProtectedContent>
+              <BsGripVertical className="me-2 fs-3" />
+            </ProtectedContent>
             <MdOutlineArrowDropDown className="me-2 fs-3" /> ASSIGNMENTS
             <div className="float-end">
               <div className="wd-grid-col-15">
@@ -42,14 +53,22 @@ export default function Assignments() {
                 <ListGroup.Item className="wd-assignment p-3 ps-1">
                   <div className="wd-grid-row">
                     <div className="wd-grid-col-7-left">
-                      <BsGripVertical className="me-2 fs-3" />
+                      <ProtectedContent>
+                        <BsGripVertical className="me-2 fs-3" />
+                      </ProtectedContent>
                     </div>
                     <div className="wd-grid-col-7-left">
                       <LuNotebookPen className="me-2 fs-3 wd-icon-green" />
                     </div>
-                    <div className="wd-grid-col-7-right">
-                      <AssignmentControlButtons />
-                    </div>
+                    <ProtectedContent>
+                      <div className="wd-grid-col-7-right">
+                        <AssignmentControlButtons
+                          assignmentId={assignment._id}
+                          setAssignmentId={setAssignmentId}
+                          setShow={setShow}
+                        />
+                      </div>
+                    </ProtectedContent>
                     <div className="wd-grid-col-79">
                       <Link
                         to={`/Kambaz/Courses/${cid}/Assignments/${assignment._id}`}
@@ -75,6 +94,15 @@ export default function Assignments() {
           </ListGroup>
         </ListGroup.Item>
       </ListGroup>
+      <AssignmentDeleteModal
+        show={show}
+        handleClose={handleClose}
+        dialogTitle="Delete Assignment"
+        assignmentId={assignmentId}
+        deleteAssignment={(assignmentId) => {
+          dispatch(deleteAssignment(assignmentId));
+        }}
+      />
     </div>
   );
 }
