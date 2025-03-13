@@ -61,7 +61,6 @@ export default function Dashboard({
         />
         <FormControl
           defaultValue={course.description}
-          rows={3}
           onChange={(e) => setCourseDescription(e.target.value)}
         />
         <hr />
@@ -69,7 +68,7 @@ export default function Dashboard({
       <h2 id="wd-dashboard-published">
         Published Courses (
         {
-          courses.filter((course) =>
+          courses.filter((course: any) =>
             enrollments.some(
               (enrollment) =>
                 enrollment.user === currentUser._id &&
@@ -83,14 +82,14 @@ export default function Dashboard({
       <div className="row" id="wd-dashboard-courses">
         <div className="row row-cols-1 row-cols-md-5 g-4">
           {courses
-            .filter((course) =>
+            .filter((course: any) =>
               enrollments.some(
                 (enrollment) =>
                   enrollment.user === currentUser._id &&
                   enrollment.course === course._id
               )
             )
-            .map((course) => (
+            .map((course: any) => (
               <Col className="wd-dashboard-course" style={{ width: "300px" }}>
                 <Card>
                   <Link

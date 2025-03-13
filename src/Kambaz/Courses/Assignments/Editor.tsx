@@ -15,13 +15,13 @@ import { BiCalendar } from "react-icons/bi";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addAssignment, updateAssignment } from "./reducer";
+import { addAssignment } from "./reducer";
 
 export default function AssignmentEditor() {
   const { cid, aid } = useParams();
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
   const assignment = assignments.find(
-    (assignment) => assignment.course === cid && assignment._id === aid
+    (assignment: any) => assignment.course === cid && assignment._id === aid
   );
   const [assignmentTitle, setAssignmentTitle] = useState("");
   const [assignmentDescription, setAssignmentDescription] = useState("");
