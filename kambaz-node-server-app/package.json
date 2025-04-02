@@ -1,0 +1,25 @@
+{
+  "name": "kambaz-node-server-app",
+  "version": "1.0.0",
+  "description": "Node.js HTTP server for the Kambaz application",
+  "homepage": "https://github.com/rmsap/kambaz-react-web-app#readme",
+  "bugs": {
+    "url": "https://github.com/rmsap/kambaz-react-web-app/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rmsap/kambaz-react-web-app.git"
+  },
+  "license": "ISC",
+  "author": "Ryan Saperstein",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "uuid": "^11.1.0"
+  }
+}
