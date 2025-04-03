@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Col, Card, Button, FormControl } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,7 +20,12 @@ export default function Dashboard({
   const [courseName, setCourseName] = useState("");
   const [courseDescription, setCourseDescription] = useState("");
   const [showAll, setShowAll] = useState(false);
+  const [allCourses, setAllCourses] = useState([]);
   const dispatch = useDispatch();
+
+  const fetchAllCourses = async () => {
+    setAllCourses(await courseClient.fetchAllCourses());
+  };
 
   const addNewCourse = async (course: any) => {
     const newCourse = await userClient.createCourse(course);
@@ -36,6 +41,10 @@ export default function Dashboard({
     const updatedCourse = await courseClient.updateCourse(course);
     dispatch(updateCourse(updatedCourse));
   };
+
+  useEffect(() => {
+    fetchAllCourses();
+  }, []);
 
   return (
     <div className="p-4" id="wd-dashboard">
@@ -87,13 +96,13 @@ export default function Dashboard({
         <hr />
       </ProtectedContent>
       <h2 id="wd-dashboard-published">
-        Published Courses ({showAll ? courses.length : courses.length})
+        Published Courses ({showAll ? allCourses.length : courses.length})
       </h2>
       <hr />
       <div className="row" id="wd-dashboard-courses">
         <div className="row row-cols-1 row-cols-md-5 g-4">
           {showAll
-            ? courses.map((course: any) => (
+            ? allCourses.map((course: any) => (
                 <Col className="wd-dashboard-course" style={{ width: "300px" }}>
                   <Card>
                     {!courses.includes(course) ? (
