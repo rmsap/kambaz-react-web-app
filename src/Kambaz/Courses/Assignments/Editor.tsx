@@ -15,7 +15,9 @@ import { BiCalendar } from "react-icons/bi";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addAssignment } from "./reducer";
+import { addAssignment, updateAssignment } from "./reducer";
+import * as coursesClient from "../client";
+import * as assignmentsClient from "./client";
 
 export default function AssignmentEditor() {
   const { cid, aid } = useParams();
@@ -30,20 +32,19 @@ export default function AssignmentEditor() {
   const [assignmentPoints, setAssignmentPoints] = useState(0);
   const dispatch = useDispatch();
 
-  // const handleUpdateOrAdd = () => {
-  //   return edit
-  //     ? dispatch(updateAssignment({ ...assignment }))
-  //     : dispatch(
-  //         addAssignment({
-  //           title: assignmentTitle,
-  //           description: assignmentDescription,
-  //           available: assignmentAvailable,
-  //           due: assignmentDue,
-  //           points: assignmentPoints,
-  //           course: cid,
-  //         })
-  //       );
-  // };
+  const createAssignmentForCourse = async (assignment: any) => {
+    if (!cid) return;
+    const newAssignment = await coursesClient.createAssignmentForCourse(
+      cid,
+      assignment
+    );
+    dispatch(addAssignment(newAssignment));
+  };
+
+  const saveAssignment = async (assignment: any) => {
+    const newAssignment = await assignmentsClient.updateAssignment(assignment);
+    dispatch(updateAssignment(newAssignment));
+  };
 
   return (
     <Container id="wd-assignments-editor">
@@ -216,21 +217,24 @@ export default function AssignmentEditor() {
         className="me-1 float-end"
         id="wd-save-btn"
         onClick={() => {
-          dispatch(
-            addAssignment({
-              title: assignmentTitle,
-              description: assignmentDescription,
-              available: assignmentAvailable,
-              due: assignmentDue,
-              points: assignmentPoints,
-              course: cid,
-            })
-          );
-          setAssignmentTitle("");
-          setAssignmentDescription("");
-          setAssignmentAvailable("");
-          setAssignmentDue("");
-          setAssignmentPoints(0);
+          const assignment = {
+            title: assignmentTitle,
+            description: assignmentDescription,
+            available: assignmentAvailable,
+            due: assignmentDue,
+            points: assignmentPoints,
+            course: cid,
+          };
+          if (aid === "Editor") {
+            createAssignmentForCourse(assignment);
+          } else {
+            saveAssignment({ ...assignment, _id: aid });
+          }
+          setAssignmentTitle(assignmentTitle);
+          setAssignmentDescription(assignmentDescription);
+          setAssignmentAvailable(assignmentAvailable);
+          setAssignmentDue(assignmentDue);
+          setAssignmentPoints(assignmentPoints);
         }}
       >
         <Link

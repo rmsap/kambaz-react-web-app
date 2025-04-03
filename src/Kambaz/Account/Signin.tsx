@@ -39,12 +39,10 @@ export default function Signin() {
         id="wd-password"
       />
       <Button onClick={signin} id="wd-signin-btn" className="w-100">
-        {" "}
-        Sign in{" "}
+        Sign in
       </Button>
       <Link id="wd-signup-link" to="/Kambaz/Account/Signup">
-        {" "}
-        Sign up{" "}
+        Sign up
       </Link>
     </div>
   );

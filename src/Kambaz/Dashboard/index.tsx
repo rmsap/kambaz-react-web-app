@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import ProtectedContent from "../Account/ProtectedContent";
 import { addCourse, deleteCourse, updateCourse } from "../Courses/reducer";
 import { addEnrollment, deleteEnrollment } from "../Courses/enrollmentsReducer";
+import * as userClient from "../Account/client";
+import * as courseClient from "../Courses/client";
 
 export default function Dashboard({
   course,
@@ -19,6 +21,21 @@ export default function Dashboard({
   const [courseDescription, setCourseDescription] = useState("");
   const [showAll, setShowAll] = useState(false);
   const dispatch = useDispatch();
+
+  const addNewCourse = async (course: any) => {
+    const newCourse = await userClient.createCourse(course);
+    dispatch(addCourse(newCourse));
+  };
+
+  const deleteCrs = async (courseId: string) => {
+    await courseClient.deleteCourse(courseId);
+    dispatch(deleteCourse(courseId));
+  };
+
+  const updateCrs = async (course: any) => {
+    const updatedCourse = await courseClient.updateCourse(course);
+    dispatch(updateCourse(updatedCourse));
+  };
 
   return (
     <div className="p-4" id="wd-dashboard">
@@ -38,9 +55,7 @@ export default function Dashboard({
             className="btn btn-primary float-end"
             id="wd-add-new-course-click"
             onClick={() =>
-              dispatch(
-                addCourse({ name: courseName, description: courseDescription })
-              )
+              addNewCourse({ name: courseName, description: courseDescription })
             }
           >
             Add
@@ -48,13 +63,11 @@ export default function Dashboard({
           <button
             className="btn btn-warning float-end me-2"
             onClick={() =>
-              dispatch(
-                updateCourse({
-                  ...course,
-                  name: courseName,
-                  description: courseDescription,
-                })
-              )
+              updateCrs({
+                ...course,
+                name: courseName,
+                description: courseDescription,
+              })
             }
             id="wd-update-course-click"
           >
@@ -140,7 +153,7 @@ export default function Dashboard({
                             <button
                               onClick={(event) => {
                                 event.preventDefault();
-                                dispatch(deleteCourse(course._id));
+                                deleteCrs(course._id);
                               }}
                               className="btn btn-danger float-end"
                               id="wd-delete-course-click"
@@ -217,7 +230,7 @@ export default function Dashboard({
                             <button
                               onClick={(event) => {
                                 event.preventDefault();
-                                dispatch(deleteCourse(course._id));
+                                deleteCrs(course._id);
                               }}
                               className="btn btn-danger float-end"
                               id="wd-delete-course-click"
@@ -300,7 +313,7 @@ export default function Dashboard({
                           <button
                             onClick={(event) => {
                               event.preventDefault();
-                              dispatch(deleteCourse(course._id));
+                              deleteCrs(course._id);
                             }}
                             className="btn btn-danger float-end"
                             id="wd-delete-course-click"

@@ -8,9 +8,11 @@ import { LuNotebookPen } from "react-icons/lu";
 import { Link, useParams } from "react-router";
 import ProtectedContent from "../../Account/ProtectedContent";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAssignment } from "./reducer";
-import { useState } from "react";
+import { deleteAssignment, setAssignments } from "./reducer";
+import { useState, useEffect } from "react";
 import AssignmentDeleteModal from "./AssignmentDeleteModal";
+import * as coursesClient from "../client";
+import * as assignmentsClient from "./client";
 
 export default function Assignments() {
   const { cid } = useParams();
@@ -19,6 +21,22 @@ export default function Assignments() {
   const [assignmentId, setAssignmentId] = useState("");
   const dispatch = useDispatch();
   const handleClose = () => setShow(false);
+
+  const fetchAssignments = async () => {
+    const assignments = await coursesClient.findAssignmentsForCourse(
+      cid as string
+    );
+    dispatch(setAssignments(assignments));
+  };
+
+  const removeAssignment = async (assignmentId: string) => {
+    await assignmentsClient.deleteAssignment(assignmentId);
+    dispatch(deleteAssignment(assignmentId));
+  };
+
+  useEffect(() => {
+    fetchAssignments();
+  }, []);
 
   return (
     <div id="wd-assignments">
@@ -100,7 +118,7 @@ export default function Assignments() {
         dialogTitle="Delete Assignment"
         assignmentId={assignmentId}
         deleteAssignment={(assignmentId) => {
-          dispatch(deleteAssignment(assignmentId));
+          removeAssignment(assignmentId);
         }}
       />
     </div>
