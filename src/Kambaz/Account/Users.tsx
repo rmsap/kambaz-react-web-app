@@ -20,6 +20,7 @@ export default function Users() {
   };
 
   const filterUsersByRole = async (role: string) => {
+    console.log(name);
     setRole(role);
     if (role) {
       const users = await client.findUsersByRole(role);
